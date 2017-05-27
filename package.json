@@ -5,7 +5,9 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "mkdir dist && babel src/main.js --out-file dist/main.js",
-    "prepublish": "npm run clean && npm run build"
+    "preversion": "npm run clean",
+    "version": "npm run build && git add -A dist",
+    "postversion": "git push && git push --tags"
   },
   "repository": "git@github.com:mobyourlife/lib-amqp-wrapper.git",
   "author": "Filipe Oliveira <contato@fmoliveira.com.br>",
