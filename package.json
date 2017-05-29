@@ -1,6 +1,6 @@
 {
   "name": "@mobyourlife/amqp-wrapper",
-  "version": "5.0.2",
+  "version": "5.1.0",
   "main": "dist/main.js",
   "scripts": {
     "clean": "rm -rf dist",

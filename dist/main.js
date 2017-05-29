@@ -58,10 +58,10 @@ function consume(queueName, cb) {
               sendAnswer(data.type, qn, res);
               ch.ack(req);
             },
-            error: function error(err) {
+            error: function error(err, extra) {
               logger.error('Error from message consumer!');
               logger.error('err = ' + err);
-              sendError(err, data);
+              sendError(err, data, extra);
               ch.ack(req);
             }
           };
@@ -90,12 +90,15 @@ function enqueueAnswer(ch, source, type, queueName, payload) {
   logger.debug('Enqueued message answer!');
 }
 
-function enqueueError(ch, source, error, data) {
+function enqueueError(ch, source, error, data, extra) {
   var message = {
     source: source,
     error: error,
     data: data
   };
+  if (extra) {
+    message.extra = extra;
+  }
   enqueueMessage(ch, 'error', message);
   logger.debug('Enqueued message error!');
 }
