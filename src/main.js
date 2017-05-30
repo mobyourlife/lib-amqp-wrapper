@@ -53,6 +53,9 @@ export function consume (queueName, cb) {
               ch.ack(req)
             }
           }
+          if (data.source) {
+            message.source = data.source
+          }
           cb(message)
         } catch (err) {
           logger.error('Exception trying to consume message!')
